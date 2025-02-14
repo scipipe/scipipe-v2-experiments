@@ -20,11 +20,13 @@ type PipelinePacket interface {
 	flowbase.Packet
 	ID() []string
 	GetURI() []string
-	GetRaw() ([]byte, err)
+	GetRaw() ([]byte, error)
 	GetScanner()
 	GetTextScanner()
-	Tags() [string]string
-	GetFlowContext() FlowContext
+	Write([]byte) error
+	Persist() error
+	GetFlowContext() FlowContext // Should this be moved to flowbase instead?
+	Tags() [string]string        // Should this be kept in the FlowContext instead?
 }
 
 func main() {
